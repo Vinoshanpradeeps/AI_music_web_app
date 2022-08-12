@@ -1,0 +1,26 @@
+body{
+    background-size: cover;
+}
+h3{
+    width: 100%;
+    margin: 0px;
+}
+.heading{
+    color: white;
+    font-size: 30px;
+    width: 100%;
+    margin: 0;
+}
+.note{
+    color: red;
+    font-size: 18px;
+}
+#song_name{
+    background-color: aqua;
+    margin-top: 50px;
+}
+canvas{
+    background-color: #000000;
+    border: 5px dashed white;
+    box-shadow: 5px 5px 5px cyan;
+}
