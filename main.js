@@ -1,9 +1,11 @@
-song = "";
-song2 = "";
+enemy = "";
+heat_waves = "";
 leftWristX = 0;
 leftWristY = 0;
 rightWristX = 0;
 rightWristY = 0;
+scoreleftWrist = 0;
+checkSong1 = "";
 
 function setup(){
     canvas = createCanvas(600, 500);
@@ -16,11 +18,26 @@ function setup(){
     poseNet.on('pose', gotPoses);
 }
 function preload(){
-    song = loadSound("enemy.mp3");  
-    song2 = loadSound("Heat Waves.mp3");
+    enemy = loadSound("enemy.mp3");  
+    heat_waves = loadSound("Heat Waves.mp3");
 }
 function draw(){
     image(video, 0, 0, 600, 500);
+
+    checkSong1 = heat_waves.isPlaying();
+    console.log(checkSong1);
+
+    fill("#000000");
+    stroke("#ff0000");
+
+    if(scoreleftWrist > 0.2){
+        circle(leftWristX, leftWristY, 20);
+        enemy.stop();
+        if(checkSong1 == false){
+            heat_waves.play();
+            document.getElementById("song_name").innerHTML = "Song name: Heat Waves"
+        }
+    }
 }
 function modelLoaded(){
     console.log("Pose net is initialized.");
@@ -28,6 +45,9 @@ function modelLoaded(){
     function gotPoses(results){
     if(results.length > 0){
         console.log(results);
+
+        scoreleftWrist = results[0].pose.keypoints[9].score;
+        console.log(scoreleftWrist).
 
         leftWristX = results[0].pose.leftWrist.x;
         leftWristY = results[0].pose.leftWrist.y;
